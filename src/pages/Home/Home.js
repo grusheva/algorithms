@@ -14,7 +14,7 @@ function Home() {
   useEffect(() => {
     dispatch(getListAllBreeds());
     dispatch(getBreedsImages());
-  }, []);
+  }, [dispatch]);
 
   return (
     <form onSubmit={() => console.log('sub')}>
