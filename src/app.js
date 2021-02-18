@@ -1,14 +1,13 @@
 import React from 'react';
-import Home from './pages/Home/Home';
-import { StylesProvider } from '@material-ui/styles';
+import { ConnectedRouter } from 'connected-react-router';
 
-import './assets/webfonts/Montserrat/Montserrat.css';
+import { Router } from './routes/Routes';
 
-function App() {
+function App({ history, context }) {
   return (
-    <StylesProvider injectFirst>
-      <Home />
-    </StylesProvider>
+    <ConnectedRouter history={history} context={context}>
+      <Router />
+    </ConnectedRouter>
   );
 }
 

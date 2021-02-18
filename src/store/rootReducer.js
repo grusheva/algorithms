@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux';
-import { breeds } from './breeds/reducer';
-import { breedsImages } from './breedsImages/reducer';
+import { connectRouter } from 'connected-react-router';
+
+import { coloredArray } from './coloredArray/reducer';
 import { filters } from './filters/reducer';
-import { savedImages } from './savedImages/reducer';
 
-const reducers = combineReducers({
-  breeds,
-  breedsImages,
-  filters,
-  savedImages,
-});
-
-export default reducers;
+export const createRootReducer = history =>
+  combineReducers({
+    router: connectRouter(history),
+    coloredArray,
+    filters,
+  });
