@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { Box } from '../AlgorithmsList/style';
+import { Box } from '../Sidebar/style';
 
 export function AlgorithmDetails({ start, end, model }) {
   return (

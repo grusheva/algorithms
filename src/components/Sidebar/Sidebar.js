@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 
 import { Box } from './style';
 
-export function AlgorithmsList({ children }) {
+export function Sidebar({ children }) {
   return (
     <Box className="container" pl={2}>
       <Box className="title">

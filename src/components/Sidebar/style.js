@@ -6,7 +6,7 @@ export const Box = withStyles({
     '&.title': { display: 'flex', alignItems: 'center', padding: '8px 0' },
     '&.container': {
       position: 'relative',
-      height: '100%',
+      height: '100vh',
       backgroundColor: COLORS.sidebarBg,
       width: '260px',
       flexShrink: 0,
