@@ -1,34 +1,38 @@
-import React  from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Grid } from '@material-ui/core';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Button } from '@material-ui/core';
 
 import { generateNewArray } from '../../store/coloredArray/actions';
-import { getList } from '../../store/coloredArray/selectors';
-import { PageHeader, PageHeaderNav } from '../../components';
+import { CororedList, PageHeader, PageHeaderNav, SortBy } from '../../components';
 import { withLayout } from '../../hoc';
 
 function ColoredArray() {
   const dispatch = useDispatch();
-  const list = useSelector(getList);
+  const handleGenerate = useCallback(() => dispatch(generateNewArray()), [dispatch]);
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    dispatch(generateNewArray());
-  };
+  useEffect(() => {
+    handleGenerate();
+  }, [handleGenerate]);
+
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
       <PageHeader title="Colored Array">
-        <PageHeaderNav withSubmit />
+        <PageHeaderNav>
+          <Button
+            onClick={handleGenerate}
+            color="primary"
+            className="ml"
+            variant="contained"
+            size="small"
+          >
+            Generate
+          </Button>
+        </PageHeaderNav>
       </PageHeader>
-      <Grid container>
-        <Grid item>
-          {list.map(item => (
-            <span>{item.color}</span>
-          ))}
-        </Grid>
-      </Grid>
-    </form>
+      <SortBy />
+      <CororedList />
+    </>
   );
 }
 

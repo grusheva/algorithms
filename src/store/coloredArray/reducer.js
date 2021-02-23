@@ -14,6 +14,13 @@ export const coloredArray = (state = defaultState, action) => {
       };
     }
 
+    case ACTION_TYPES.SET_SORTED_ARRAY: {
+      return {
+        ...state,
+        list: action.payload,
+      };
+    }
+
     default:
       return state;
   }

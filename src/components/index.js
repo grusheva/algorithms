@@ -3,5 +3,7 @@ import { AlgorithmDetails } from './AlgorithmDetails/AlgorithmDetails';
 import { Layout } from './Layout/Layout';
 import { PageHeader } from './PageHeader/PageHeader';
 import { PageHeaderNav } from './PageHeaderNav/PageHeaderNav';
+import { CororedList } from './CororedList/CororedList';
+import { SortBy } from './SortBy/SortBy';
 
-export { Sidebar, AlgorithmDetails, Layout, PageHeader, PageHeaderNav };
+export { Sidebar, AlgorithmDetails, Layout, PageHeader, PageHeaderNav, CororedList, SortBy };
