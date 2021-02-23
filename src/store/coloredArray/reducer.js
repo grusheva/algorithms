@@ -2,7 +2,7 @@ import { ACTION_TYPES } from './actionTypes';
 
 const defaultState = {
   list: [],
-  error: null,
+  param: null,
 };
 
 export const coloredArray = (state = defaultState, action) => {
@@ -18,6 +18,13 @@ export const coloredArray = (state = defaultState, action) => {
       return {
         ...state,
         list: action.payload,
+      };
+    }
+
+    case ACTION_TYPES.SET_SORTED_PARAM_VALUE: {
+      return {
+        ...state,
+        param: action.payload,
       };
     }
 

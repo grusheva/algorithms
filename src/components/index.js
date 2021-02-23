@@ -5,5 +5,15 @@ import { PageHeader } from './PageHeader/PageHeader';
 import { PageHeaderNav } from './PageHeaderNav/PageHeaderNav';
 import { CororedList } from './CororedList/CororedList';
 import { SortBy } from './SortBy/SortBy';
+import { Filter } from './Filter/Filter';
 
-export { Sidebar, AlgorithmDetails, Layout, PageHeader, PageHeaderNav, CororedList, SortBy };
+export {
+  Sidebar,
+  AlgorithmDetails,
+  Layout,
+  PageHeader,
+  PageHeaderNav,
+  CororedList,
+  SortBy,
+  Filter,
+};

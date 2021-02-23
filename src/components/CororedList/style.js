@@ -10,11 +10,11 @@ export const Box = withStyles({
     '&.item': {
       height: '20px',
       width: '20px',
-      border: `1px solid ${COLORS.greyBorder}`,
+      border: `5px solid ${COLORS.sidebarBg}`,
       transition: 'all .2s ease-in-out',
 
       '&.selected': { borderColor: COLORS.red },
-      '&:hover': { transform: 'scale(1.5)', filter: 'blur(0)' },
+      '&:hover': { transform: 'scale(1.5)' },
     },
   },
 })(MuiBox);

@@ -2,18 +2,22 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
 
-import { generateNewArray } from '../../store/coloredArray/actions';
-import { CororedList, PageHeader, PageHeaderNav, SortBy } from '../../components';
+import { generateNewArray, resetSortedParam } from '../../store/coloredArray/actions';
+import { CororedList, Filter, PageHeader, PageHeaderNav, SortBy } from '../../components';
 import { withLayout } from '../../hoc';
+import { resetFilterValue } from '../../store/filter/actions';
 
 function ColoredArray() {
   const dispatch = useDispatch();
-  const handleGenerate = useCallback(() => dispatch(generateNewArray()), [dispatch]);
+  const handleGenerate = useCallback(() => {
+    dispatch(generateNewArray());
+    dispatch(resetSortedParam());
+    dispatch(resetFilterValue());
+  }, [dispatch]);
 
   useEffect(() => {
     handleGenerate();
   }, [handleGenerate]);
-
 
   return (
     <>
@@ -31,6 +35,7 @@ function ColoredArray() {
         </PageHeaderNav>
       </PageHeader>
       <SortBy />
+      <Filter />
       <CororedList />
     </>
   );
