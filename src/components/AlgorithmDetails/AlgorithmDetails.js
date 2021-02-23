@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
+
 import { Box } from '../Sidebar/style';
 
 export function AlgorithmDetails({ start, end, model }) {
@@ -10,3 +12,11 @@ export function AlgorithmDetails({ start, end, model }) {
     </Box>
   );
 }
+
+AlgorithmDetails.propTypes = {
+  start: PropTypes.string.isRequired,
+  end: PropTypes.string.isRequired,
+  model: PropTypes.shape({
+    title: PropTypes.string,
+  }).isRequired,
+};

@@ -1,5 +1,5 @@
 import { Box as MuiBox, styled, withStyles } from '@material-ui/core';
-import { COLORS } from '../../assets/const';
+import { COLORS, SIZES } from '../../assets/const';
 
 export const GlobalStyle = withStyles({
   // @global is handled by jss-plugin-global.
@@ -8,7 +8,7 @@ export const GlobalStyle = withStyles({
       height: '100%',
     },
     body: {
-      background: COLORS.background,
+      background: COLORS.generalBackground,
       fontFamily: 'Montserrat',
     },
   },
@@ -17,6 +17,8 @@ export const GlobalStyle = withStyles({
 export const Root = styled(MuiBox)({
   display: 'flex',
   minHeight: '100vh',
+  maxWidth: '100%',
+  overflow: 'hidden',
 });
 
 export const AppContent = styled(MuiBox)({
@@ -27,8 +29,7 @@ export const AppContent = styled(MuiBox)({
 
 export const MainContent = styled(MuiBox)({
   flex: 1,
-  background: COLORS.background,
-
+  marginLeft: SIZES.sidebarWidth,
   '@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)': {
     flex: 'none',
   },

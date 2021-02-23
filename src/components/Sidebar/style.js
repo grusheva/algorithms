@@ -1,5 +1,5 @@
 import { Box as MuiBox, withStyles } from '@material-ui/core';
-import { COLORS } from '../../assets/const';
+import { COLORS, SIZES } from '../../assets/const';
 
 export const Box = withStyles({
   root: {
@@ -12,10 +12,10 @@ export const Box = withStyles({
       borderBottom: `1px solid ${COLORS.greyBorder}`,
     },
     '&.container': {
-      position: 'relative',
+      position: 'fixed',
       height: '100vh',
       backgroundColor: COLORS.sidebarBg,
-      width: '260px',
+      width: SIZES.sidebarWidth,
       flexShrink: 0,
     },
   },
