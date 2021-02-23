@@ -1,30 +1,17 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { Grid } from '@material-ui/core';
 
-import { getListAllBreeds } from '../../store/breeds/actions';
-import { getBreedsImages } from '../../store/breedsImages/actions';
-
-import { PageHeader, PageHeaderNav } from '../../components';
+import { PageHeader } from '../../components';
 import { withLayout } from '../../hoc';
 
 function Home() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getListAllBreeds());
-    dispatch(getBreedsImages());
-  }, [dispatch]);
-
   return (
-    <form onSubmit={() => console.log('sub')}>
-      <PageHeader title="Task 1">
-        <PageHeaderNav withSubmit />
-      </PageHeader>
+    <>
+      <PageHeader title="Welcome!" />
       <Grid container>
-        <Grid item></Grid>
+        <Grid item>This progect is training</Grid>
       </Grid>
-    </form>
+    </>
   );
 }
 

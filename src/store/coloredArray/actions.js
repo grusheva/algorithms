@@ -1,6 +1,12 @@
-import { BREEDS_ACTION_TYPES } from './actionTypes';
-import { getAllBreeds } from '../../api/breeds';
+import { ACTION_TYPES } from './actionTypes';
+import { coloredArrayModel } from '../../models';
 
+export const generateNewArray = () => ({
+  type: ACTION_TYPES.GENERATE_NEW_ARRAY,
+  payload: coloredArrayModel.generate(),
+});
+
+/*
 export function getListAllBreedsStart() {
   return {
     type: BREEDS_ACTION_TYPES.GET_LIST_ALL_BREEDS_START,
@@ -37,3 +43,4 @@ export function getListAllBreeds() {
     }
   };
 }
+*/
