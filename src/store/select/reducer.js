@@ -17,27 +17,12 @@ export const select = (state = defaultState, action) => {
       };
     }
 
-    // case FILTER_ACTION_TYPES.SET_FILTERS: {
-    //   return {
-    //     ...state,
-    //     list: action.payload,
-    //   };
-    // }
-    //
-    // case FILTER_ACTION_TYPES.RESET_FILTERS: {
-    //   return {
-    //     ...state,
-    //     list: [],
-    //     activeFilter: 'all',
-    //   };
-    // }
-    //
-    // case FILTER_ACTION_TYPES.SET_ACTIVE_FILTER: {
-    //   return {
-    //     ...state,
-    //     activeFilter: action.payload,
-    //   };
-    // }
+    case ACTION_TYPES.UPDATE_SELECT_IDS_LIST: {
+      return {
+        ...state,
+        list: action.payload,
+      };
+    }
 
     default:
       return state;

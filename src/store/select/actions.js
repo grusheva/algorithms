@@ -1,4 +1,8 @@
+import { includes } from 'lodash';
+
 import { ACTION_TYPES } from './actionTypes';
+import { getList } from '../coloredArray/selectors';
+import { setFilterValue } from '../filter/actions';
 
 export function toggleSelectItemId(payload) {
   return {
@@ -7,22 +11,25 @@ export function toggleSelectItemId(payload) {
   };
 }
 
-// export function setFilters(payload) {
-//   return {
-//     type: FILTER_ACTION_TYPES.SET_FILTERS,
-//     payload: payload.sort(),
-//   };
-// }
-//
-// export function resetFilters() {
-//   return {
-//     type: FILTER_ACTION_TYPES.RESET_FILTERS,
-//   };
-// }
-//
-// export function setActiveFilter(payload) {
-//   return {
-//     type: FILTER_ACTION_TYPES.SET_ACTIVE_FILTER,
-//     payload,
-//   };
-// }
+export function updateSelectedIdsArray(payload) {
+  return {
+    type: ACTION_TYPES.UPDATE_SELECT_IDS_LIST,
+    payload,
+  };
+}
+
+export function selectByFilter(value) {
+  return async (dispatch, state) => {
+    dispatch(setFilterValue(value));
+    const list = getList(state());
+    const selectedIdsArray = [];
+
+    list.forEach(({ hex, id }) => {
+      if (includes(hex, value)) {
+        selectedIdsArray.push(id);
+      }
+    });
+
+    dispatch(updateSelectedIdsArray(selectedIdsArray));
+  };
+}
