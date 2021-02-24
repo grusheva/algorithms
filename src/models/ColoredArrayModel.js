@@ -8,23 +8,18 @@ const markD = 'generation End';
 const markE = 'end';
 
 class ColoredArrayModel {
-  defaultValues = { count: 10000, rgbLimits: { min: 0, max: 256 } };
+  defaultValues = { count: 10000 };
   totalCounter = 0;
   separator = '-';
-  rgbSeparator = '-';
+  rgbSeparator = ',';
 
   getItemProps(item) {
     const propsArray = item.split(this.separator);
-    const rgb = head(propsArray);
 
     return {
       id: last(propsArray),
-      rgb: `rgb(${rgb})`,
+      hex: `#${head(propsArray)}`,
     };
-  }
-
-  getRandomParam() {
-    return random(this.defaultValues.rgbLimits.min, this.defaultValues.rgbLimits.max);
   }
 
   generate(count = this.defaultValues.count) {
@@ -35,9 +30,9 @@ class ColoredArrayModel {
     for (let i = 0; i < count; i++) {
       performance.mark(markC);
 
-      newArray[i] = `${this.getRandomParam()},${this.getRandomParam()},${this.getRandomParam()}${
-        this.separator
-      }${this.totalCounter}`;
+      newArray[i] = `${Math.random().toString(16).substr(2, 6)}${this.separator}${
+        this.totalCounter
+      }`;
 
       this.totalCounter += 1;
       performance.mark(markD);
@@ -57,17 +52,14 @@ class ColoredArrayModel {
   }
 
   getSpectrumParam(param, value) {
-    const { rgb } = this.getItemProps(value);
-    const rgbArr = rgb.split(this.rgbSeparator);
-
     if (param === SPECTRUM_VALUES.r) {
-      return rgbArr[0];
+      return parseInt(value.slice(1, 3), 16);
     }
     if (param === SPECTRUM_VALUES.g) {
-      return rgbArr[1];
+      return parseInt(value.slice(3, 5), 16);
     }
     if (param === SPECTRUM_VALUES.b) {
-      return rgbArr[2];
+      return parseInt(value.slice(5, 7), 16);
     }
   }
 

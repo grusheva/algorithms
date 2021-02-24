@@ -31,15 +31,15 @@ export function CororedList() {
   );
 
   const renderItem = item => {
-    const { rgb, id } = coloredArrayModel.getItemProps(item);
+    const { hex, id } = coloredArrayModel.getItemProps(item);
 
     return (
       <Box
-        // className={getClassName(id)}
-        className="item"
+        className={getClassName(id)}
+        // className="item"
         key={id}
         onClick={handleClick(id)}
-        // style={{ backgroundColor: rgb }}
+        style={{ backgroundColor: hex }}
       />
     );
   };
