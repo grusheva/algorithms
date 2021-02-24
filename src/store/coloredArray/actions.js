@@ -1,6 +1,7 @@
 import { ACTION_TYPES } from './actionTypes';
 import { coloredArrayModel } from '../../models';
 import { getList } from './selectors';
+import { initHistory } from '../select/actions';
 
 export const generateNewArray = () => ({
   type: ACTION_TYPES.GENERATE_NEW_ARRAY,
@@ -23,6 +24,12 @@ export const setSortedArray = payload => ({
 
 export const resetSortedParam = () => setSortedParamValue(null);
 
+export function generateArray() {
+  return async dispatch => {
+    dispatch(generateNewArray());
+    dispatch(initHistory());
+  };
+}
 export function sortBySpectrum(param) {
   return async (dispatch, state) => {
     dispatch(sortBySpectrumCall());

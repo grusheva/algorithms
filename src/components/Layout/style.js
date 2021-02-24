@@ -2,7 +2,6 @@ import { Box as MuiBox, styled, withStyles } from '@material-ui/core';
 import { COLORS, SIZES } from '../../assets/const';
 
 export const GlobalStyle = withStyles({
-  // @global is handled by jss-plugin-global.
   '@global': {
     'html, body, #root': {
       height: '100%',

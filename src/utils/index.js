@@ -1,3 +1,4 @@
 import { rgbToHex } from './rgbToHex';
+import { sumInLimits } from './sumInLimits';
 
-export { rgbToHex };
+export { rgbToHex, sumInLimits };
