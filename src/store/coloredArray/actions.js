@@ -22,12 +22,22 @@ export const setSortedArray = payload => ({
   payload,
 });
 
+export const setStartGenerateNewArray = () => ({
+  type: ACTION_TYPES.START_GENERATE_NEW_ARRAY,
+});
+
+export const setEndGenerateNewArray = () => ({
+  type: ACTION_TYPES.END_GENERATE_NEW_ARRAY,
+});
+
 export const resetSortedParam = () => setSortedParamValue(null);
 
 export function generateArray() {
   return async dispatch => {
+    dispatch(setStartGenerateNewArray());
     dispatch(generateNewArray());
     dispatch(initHistory());
+    dispatch(setEndGenerateNewArray());
   };
 }
 export function sortBySpectrum(param) {

@@ -49,7 +49,7 @@ export const select = (state = defaultState, action) => {
       };
     }
 
-    case ACTION_TYPES.SET_HISTORY_BACK: {
+    case ACTION_TYPES.SET_SELECTED_FROM_HISTORY: {
       return {
         ...state,
         list: action.payload,

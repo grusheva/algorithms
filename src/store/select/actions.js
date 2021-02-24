@@ -38,12 +38,20 @@ export const setHistoryArrow = payload => ({
 });
 
 export const setSelectedFromHistory = payload => ({
-  type: ACTION_TYPES.SET_HISTORY_BACK,
+  type: ACTION_TYPES.SET_SELECTED_FROM_HISTORY,
   payload,
 });
 
 export const initHistory = () => ({
   type: ACTION_TYPES.INIT_HISTORY,
+});
+
+export const setHistoryBack = () => ({
+  type: ACTION_TYPES.SET_HISTORY_BACK,
+});
+
+export const setHistoryNext = () => ({
+  type: ACTION_TYPES.SET_HISTORY_NEXT,
 });
 
 export const setSelectedHistory = value => {
@@ -60,5 +68,16 @@ export const setSelectedHistory = value => {
   };
 };
 
-export const setSelectedHistoryBack = () => setSelectedHistory(-1);
-export const setSelectedHistoryNext = () => setSelectedHistory(1);
+export const setSelectedHistoryBack = () => {
+  return async dispatch => {
+    dispatch(setHistoryBack());
+    dispatch(setSelectedHistory(-1));
+  };
+};
+
+export const setSelectedHistoryNext = () => {
+  return async dispatch => {
+    dispatch(setHistoryNext());
+    dispatch(setSelectedHistory(1));
+  };
+};
