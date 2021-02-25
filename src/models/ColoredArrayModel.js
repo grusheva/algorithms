@@ -1,5 +1,3 @@
-import { head, last, random } from 'lodash';
-import { rgbToHex } from '../utils';
 import { SPECTRUM_VALUES } from '../utils/constants';
 const markA = 'Start';
 const markB = 'for';
@@ -13,15 +11,6 @@ class ColoredArrayModel {
   separator = '-';
   rgbSeparator = ',';
 
-  getItemProps(item) {
-    const propsArray = item.split(this.separator);
-
-    return {
-      id: last(propsArray),
-      hex: `#${head(propsArray)}`,
-    };
-  }
-
   generate(count = this.defaultValues.count) {
     performance.mark(markA);
     const newArray = new Array(count);
@@ -30,9 +19,7 @@ class ColoredArrayModel {
     for (let i = 0; i < count; i++) {
       performance.mark(markC);
 
-      newArray[i] = `${Math.random().toString(16).substr(2, 6)}${this.separator}${
-        this.totalCounter
-      }`;
+      newArray[i] = { hex: `#${Math.random().toString(16).substr(2, 6)}`, id: this.totalCounter };
 
       this.totalCounter += 1;
       performance.mark(markD);

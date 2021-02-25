@@ -5,7 +5,6 @@ import { getList } from '../coloredArray/selectors';
 import { setFilterValue } from '../filter/actions';
 import { getHistory, getHistoryArrow } from './selectors';
 import { sumInLimits } from '../../utils';
-import { coloredArrayModel } from '../../models';
 
 export const toggleSelectItemId = payload => ({
   type: ACTION_TYPES.TOGGLE_SELECT_ITEM_ID,
@@ -23,9 +22,7 @@ export const selectByFilter = value => {
     const list = getList(state());
     const selectedIdsArray = [];
 
-    list.forEach(item => {
-      const { hex, id } = coloredArrayModel.getItemProps(item);
-
+    list.forEach(({ hex, id }) => {
       if (includes(hex, value)) {
         selectedIdsArray.push(id);
       }

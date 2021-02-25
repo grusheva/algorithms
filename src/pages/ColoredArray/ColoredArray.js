@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
 
 import { generateArray, resetSortedParam } from '../../store/coloredArray/actions';
-import { CororedList, Filter, PageHeader, PageHeaderNav, SortBy } from '../../components';
+import { ColoredList, Filter, PageHeader, PageHeaderNav, SortBy } from '../../components';
 import { withLayout } from '../../hoc';
 import { resetFilterValue } from '../../store/filter/actions';
 import { setSelectedHistoryBack, setSelectedHistoryNext } from '../../store/select/actions';
@@ -52,7 +52,7 @@ function ColoredArray() {
       </PageHeader>
       <SortBy />
       <Filter />
-      <CororedList />
+      <ColoredList />
     </>
   );
 }
