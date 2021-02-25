@@ -8,8 +8,6 @@ const markE = 'end';
 class ColoredArrayModel {
   defaultValues = { count: 10000 };
   totalCounter = 0;
-  separator = '-';
-  rgbSeparator = ',';
 
   generate(count = this.defaultValues.count) {
     performance.mark(markA);
@@ -18,14 +16,15 @@ class ColoredArrayModel {
 
     for (let i = 0; i < count; i++) {
       performance.mark(markC);
-
-      newArray[i] = { hex: `#${Math.random().toString(16).substr(2, 6)}`, id: this.totalCounter };
-
+      const hex = Math.random().toString(16).substr(2, 6);
+      newArray[i] = {
+        hex,
+        id: this.totalCounter,
+      };
       this.totalCounter += 1;
       performance.mark(markD);
     }
     performance.mark(markE);
-
     performance.measure('measure start to for (a-b)', markA, markB);
     performance.measure('measure for to generation (b-c)', markB, markC);
     performance.measure('measure generation to generation End (c-d)', markC, markD);
@@ -38,21 +37,23 @@ class ColoredArrayModel {
     return newArray;
   }
 
-  getSpectrumParam(param, value) {
-    if (param === SPECTRUM_VALUES.r) {
-      return parseInt(value.slice(1, 3), 16);
+  getChannelValue(channel, hex) {
+    if (channel === SPECTRUM_VALUES.r) {
+      return parseInt(hex.slice(0, 2), 16);
     }
-    if (param === SPECTRUM_VALUES.g) {
-      return parseInt(value.slice(3, 5), 16);
+    if (channel === SPECTRUM_VALUES.g) {
+      return parseInt(hex.slice(2, 4), 16);
     }
-    if (param === SPECTRUM_VALUES.b) {
-      return parseInt(value.slice(5, 7), 16);
+    if (channel === SPECTRUM_VALUES.b) {
+      return parseInt(hex.slice(4, 6), 16);
     }
   }
 
-  sortBySpectrum(array, param) {
+  sortByChannel(array, param) {
     return [
-      ...array.sort((a, b) => this.getSpectrumParam(param, a) - this.getSpectrumParam(param, b)),
+      ...array.sort(
+        (a, b) => this.getChannelValue(param, a.hex) - this.getChannelValue(param, b.hex),
+      ),
     ];
   }
 }

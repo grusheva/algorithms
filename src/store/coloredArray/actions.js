@@ -45,7 +45,7 @@ export function sortBySpectrum(param) {
     dispatch(sortBySpectrumCall());
     dispatch(setSortedParamValue(param));
     if (param) {
-      dispatch(setSortedArray(coloredArrayModel.sortBySpectrum(getList(state()), param)));
+      dispatch(setSortedArray(coloredArrayModel.sortByChannel(getList(state()), param)));
     }
   };
 }

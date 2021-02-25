@@ -16,7 +16,7 @@ export function Filter() {
   return (
     <Box mb={3}>
       <Typography>Please, input hex value to search</Typography>
-      <TextField label="HEX" value={value} onChange={handleChange} />
+      <TextField label="HEX" value={value} onChange={handleChange} autoFocus={false} />
     </Box>
   );
 }

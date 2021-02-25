@@ -19,16 +19,18 @@ export const updateSelectedIdsArray = payload => ({
 export const selectByFilter = value => {
   return async (dispatch, state) => {
     dispatch(setFilterValue(value));
-    const list = getList(state());
-    const selectedIdsArray = [];
+    if (value === 0 || value) {
+      const list = getList(state());
+      const selectedIdsMap = {};
 
-    list.forEach(({ hex, id }) => {
-      if (includes(hex, value)) {
-        selectedIdsArray.push(id);
-      }
-    });
+      list.forEach(({ hex, id }) => {
+        if (includes(hex, value)) {
+          selectedIdsMap[id] = true;
+        }
+      });
 
-    dispatch(updateSelectedIdsArray(selectedIdsArray));
+      dispatch(updateSelectedIdsArray(selectedIdsMap));
+    }
   };
 };
 
@@ -57,14 +59,14 @@ export const setHistoryNext = () => ({
 export const setSelectedHistory = value => {
   return async (dispatch, state) => {
     const history = getHistory(state());
-    const getNewHistoryArrow = sumInLimits(getHistoryArrow(state()), value);
+    const newHistoryArrow = sumInLimits(getHistoryArrow(state()), value);
 
-    if (Math.abs(getNewHistoryArrow) > history.length) {
+    if (Math.abs(newHistoryArrow) >= history.length) {
       return;
     }
 
-    dispatch(setHistoryArrow(getNewHistoryArrow));
-    dispatch(setSelectedFromHistory(history[history.length + getNewHistoryArrow - 1]));
+    dispatch(setHistoryArrow(newHistoryArrow));
+    dispatch(setSelectedFromHistory(history[history.length + newHistoryArrow - 1]));
   };
 };
 

@@ -5,20 +5,20 @@ import { getIsLoading, getList } from '../../store/coloredArray/selectors';
 
 import { Box } from './style';
 import { ColoredItem } from './ColoredItem';
-import { getSelectedList } from '../../store/select/selectors';
+import { getSelectedIdsMap } from '../../store/select/selectors';
 
 export function ColoredListComponent() {
   const list = useSelector(getList);
   const isLoading = useSelector(getIsLoading);
-  const selectedIdsList = useSelector(getSelectedList);
+  const selectedIdsMap = useSelector(getSelectedIdsMap);
 
-  const getSelected = useCallback(id => includes(selectedIdsList, id), [selectedIdsList]);
+  console.log(selectedIdsMap);
 
   return (
     <Box className="container">
       {!isLoading &&
         list.map(({ id, hex }) => (
-          <ColoredItem key={id} id={id} hex={hex} selected={getSelected(id)} />
+          <ColoredItem key={id} id={id} hex={hex} selected={Boolean(selectedIdsMap[id])} />
         ))}
     </Box>
   );

@@ -17,7 +17,7 @@ function ColoredItemComponent({ id, hex, selected }) {
     () => ({
       key: id,
       onClick: handleClick(id),
-      style: { backgroundColor: hex },
+      style: { backgroundColor: `#${hex}` },
     }),
     [id, hex],
   );
