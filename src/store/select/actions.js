@@ -19,6 +19,7 @@ export const updateSelectedIdsArray = payload => ({
 export const selectByFilter = value => {
   return async (dispatch, state) => {
     dispatch(setFilterValue(value));
+
     if (value === 0 || value) {
       const list = getList(state());
       const selectedIdsMap = {};
@@ -30,6 +31,8 @@ export const selectByFilter = value => {
       });
 
       dispatch(updateSelectedIdsArray(selectedIdsMap));
+    } else {
+      dispatch(updateSelectedIdsArray({}));
     }
   };
 };

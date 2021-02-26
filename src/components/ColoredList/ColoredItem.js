@@ -9,7 +9,7 @@ import { Box } from './style';
 function ColoredItemComponent({ id, hex, selected }) {
   const dispatch = useDispatch();
 
-  const handleClick = useCallback(id => () => dispatch(toggleSelectItemId(id)), []);
+  const handleClick = useCallback(id => () => dispatch(toggleSelectItemId(id)), [dispatch]);
 
   const getClassName = useCallback(() => (selected ? 'item selected' : 'item'), [selected]);
 
@@ -19,7 +19,7 @@ function ColoredItemComponent({ id, hex, selected }) {
       onClick: handleClick(id),
       style: { backgroundColor: `#${hex}` },
     }),
-    [id, hex],
+    [id, handleClick, hex],
   );
 
   return <Box {...getProps} className={getClassName()} />;

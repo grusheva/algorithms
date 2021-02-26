@@ -1,6 +1,5 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
-import { includes } from 'lodash';
 import { getIsLoading, getList } from '../../store/coloredArray/selectors';
 
 import { Box } from './style';
@@ -11,8 +10,6 @@ export function ColoredListComponent() {
   const list = useSelector(getList);
   const isLoading = useSelector(getIsLoading);
   const selectedIdsMap = useSelector(getSelectedIdsMap);
-
-  console.log(selectedIdsMap);
 
   return (
     <Box className="container">
