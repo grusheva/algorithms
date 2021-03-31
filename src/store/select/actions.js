@@ -19,16 +19,21 @@ export const updateSelectedIdsArray = payload => ({
 export const selectByFilter = value => {
   return async (dispatch, state) => {
     dispatch(setFilterValue(value));
-    const list = getList(state());
-    const selectedIdsArray = [];
 
-    list.forEach(({ hex, id }) => {
-      if (includes(hex, value)) {
-        selectedIdsArray.push(id);
-      }
-    });
+    if (value === 0 || value) {
+      const list = getList(state());
+      const selectedIdsMap = {};
 
-    dispatch(updateSelectedIdsArray(selectedIdsArray));
+      list.forEach(({ hex, id }) => {
+        if (includes(hex, value)) {
+          selectedIdsMap[id] = true;
+        }
+      });
+
+      dispatch(updateSelectedIdsArray(selectedIdsMap));
+    } else {
+      dispatch(updateSelectedIdsArray({}));
+    }
   };
 };
 
@@ -38,7 +43,7 @@ export const setHistoryArrow = payload => ({
 });
 
 export const setSelectedFromHistory = payload => ({
-  type: ACTION_TYPES.SET_HISTORY_BACK,
+  type: ACTION_TYPES.SET_SELECTED_FROM_HISTORY,
   payload,
 });
 
@@ -46,19 +51,38 @@ export const initHistory = () => ({
   type: ACTION_TYPES.INIT_HISTORY,
 });
 
+export const setHistoryBack = () => ({
+  type: ACTION_TYPES.SET_HISTORY_BACK,
+});
+
+export const setHistoryNext = () => ({
+  type: ACTION_TYPES.SET_HISTORY_NEXT,
+});
+
 export const setSelectedHistory = value => {
   return async (dispatch, state) => {
     const history = getHistory(state());
-    const getNewHistoryArrow = sumInLimits(getHistoryArrow(state()), value);
+    const newHistoryArrow = sumInLimits(getHistoryArrow(state()), value);
 
-    if (Math.abs(getNewHistoryArrow) > history.length) {
+    if (Math.abs(newHistoryArrow) >= history.length) {
       return;
     }
 
-    dispatch(setHistoryArrow(getNewHistoryArrow));
-    dispatch(setSelectedFromHistory(history[history.length + getNewHistoryArrow - 1]));
+    dispatch(setHistoryArrow(newHistoryArrow));
+    dispatch(setSelectedFromHistory(history[history.length + newHistoryArrow - 1]));
   };
 };
 
-export const setSelectedHistoryBack = () => setSelectedHistory(-1);
-export const setSelectedHistoryNext = () => setSelectedHistory(1);
+export const setSelectedHistoryBack = () => {
+  return async dispatch => {
+    dispatch(setHistoryBack());
+    dispatch(setSelectedHistory(-1));
+  };
+};
+
+export const setSelectedHistoryNext = () => {
+  return async dispatch => {
+    dispatch(setHistoryNext());
+    dispatch(setSelectedHistory(1));
+  };
+};

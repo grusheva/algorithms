@@ -1,9 +1,7 @@
-import { includes } from 'lodash';
-
 import { ACTION_TYPES } from './actionTypes';
 
 const defaultState = {
-  list: [],
+  selectedIdsMap: {},
   history: [],
   historyArrow: 0,
 };
@@ -13,19 +11,23 @@ export const select = (state = defaultState, action) => {
     case ACTION_TYPES.INIT_HISTORY: {
       return {
         ...state,
-        history: [[...state.list]],
+        history: [{ ...state.selectedIdsMap }],
       };
     }
 
     case ACTION_TYPES.TOGGLE_SELECT_ITEM_ID: {
-      const newList = includes(state.list, action.payload)
-        ? state.list.filter(item => item !== action.payload)
-        : [...state.list, action.payload];
+      const newSelectedMap = {
+        ...state.selectedIdsMap,
+        [action.payload]: !state.selectedIdsMap[action.payload],
+      };
 
       return {
         ...state,
-        history: [...state.history.slice(0, state.history.length + state.historyArrow), newList],
-        list: newList,
+        history: [
+          ...state.history.slice(0, state.history.length + state.historyArrow),
+          newSelectedMap,
+        ],
+        selectedIdsMap: newSelectedMap,
         historyArrow: defaultState.historyArrow,
       };
     }
@@ -35,9 +37,9 @@ export const select = (state = defaultState, action) => {
         ...state,
         history: [
           ...state.history.slice(0, state.history.length + state.historyArrow),
-          [...action.payload],
+          { ...action.payload },
         ],
-        list: action.payload,
+        selectedIdsMap: action.payload,
         historyArrow: defaultState.historyArrow,
       };
     }
@@ -49,10 +51,10 @@ export const select = (state = defaultState, action) => {
       };
     }
 
-    case ACTION_TYPES.SET_HISTORY_BACK: {
+    case ACTION_TYPES.SET_SELECTED_FROM_HISTORY: {
       return {
         ...state,
-        list: action.payload,
+        selectedIdsMap: action.payload,
       };
     }
 

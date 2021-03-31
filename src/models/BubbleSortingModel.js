@@ -17,7 +17,6 @@ class BubbleSort {
         }
       }
     } while (swapped);
-    console.log('i');
 
     return inputArr;
   }
