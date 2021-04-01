@@ -1,4 +1,5 @@
 import { SPECTRUM_VALUES } from '../utils/constants';
+import { getNestedMap } from '../utils/getNestedMap';
 
 class ColoredArrayModel {
   defaultValues = { count: 10000 };
@@ -36,6 +37,28 @@ class ColoredArrayModel {
         (a, b) => this.getChannelValue(param, a.hex) - this.getChannelValue(param, b.hex),
       ),
     ];
+  }
+
+  sortByHex(array) {
+    return [...array].sort((a, b) => {
+      if (a.hex < b.hex) {
+        return -1;
+      }
+      if (a.hex > b.hex) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  restructuration(array = []) {
+    let coloredMap = {};
+
+    array.forEach(
+      ({ hex, id }) => (coloredMap = { ...coloredMap, ...getNestedMap(hex, id, coloredMap) }),
+    );
+
+    return coloredMap;
   }
 }
 

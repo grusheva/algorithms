@@ -1,60 +1,53 @@
 import { ACTION_TYPES } from './actionTypes';
+import { Stack } from '../../models';
 
 const defaultState = {
   selectedIdsMap: {},
-  history: [],
-  historyArrow: 0,
+  history: { back: new Stack(), next: new Stack() },
 };
 
 export const select = (state = defaultState, action) => {
   switch (action.type) {
-    case ACTION_TYPES.INIT_HISTORY: {
-      return {
-        ...state,
-        history: [{ ...state.selectedIdsMap }],
-      };
-    }
-
     case ACTION_TYPES.TOGGLE_SELECT_ITEM_ID: {
       const newSelectedMap = {
         ...state.selectedIdsMap,
         [action.payload]: !state.selectedIdsMap[action.payload],
       };
 
+      state.history.back.push(state.selectedIdsMap);
+
       return {
         ...state,
-        history: [
-          ...state.history.slice(0, state.history.length + state.historyArrow),
-          newSelectedMap,
-        ],
+        history: { ...state.history, next: new Stack() },
         selectedIdsMap: newSelectedMap,
-        historyArrow: defaultState.historyArrow,
       };
     }
 
     case ACTION_TYPES.UPDATE_SELECT_IDS_LIST: {
+      state.history.back.push(state.selectedIdsMap);
+
       return {
         ...state,
-        history: [
-          ...state.history.slice(0, state.history.length + state.historyArrow),
-          { ...action.payload },
-        ],
+        history: { ...state.history, next: new Stack() },
         selectedIdsMap: action.payload,
-        historyArrow: defaultState.historyArrow,
       };
     }
 
-    case ACTION_TYPES.SET_HISTORY_ARROW: {
+    case ACTION_TYPES.SET_HISTORY_BACK: {
+      state.history.next.push(state.selectedIdsMap);
+
       return {
         ...state,
-        historyArrow: action.payload,
+        selectedIdsMap: state.history.back.pop(),
       };
     }
 
-    case ACTION_TYPES.SET_SELECTED_FROM_HISTORY: {
+    case ACTION_TYPES.SET_HISTORY_NEXT: {
+      state.history.back.push(state.selectedIdsMap);
+
       return {
         ...state,
-        selectedIdsMap: action.payload,
+        selectedIdsMap: state.history.next.pop(),
       };
     }
 

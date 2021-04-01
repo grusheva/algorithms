@@ -1,12 +1,29 @@
 import { ACTION_TYPES } from './actionTypes';
 import { coloredArrayModel } from '../../models';
-import { getList } from './selectors';
-import { initHistory } from '../select/actions';
+import { getColoredList } from './selectors';
 
-export const generateNewArray = () => ({
+export const getNewArray = () => ({
   type: ACTION_TYPES.GENERATE_NEW_ARRAY,
   payload: coloredArrayModel.generate(),
 });
+
+export const getSortedArray = coloredList => ({
+  type: ACTION_TYPES.GET_SORTED_ARRAY,
+  payload: coloredArrayModel.sortByHex(coloredList),
+});
+
+export const getRestructuratedArray = coloredList => ({
+  type: ACTION_TYPES.GET_RESTRUCTURATED_ARRAY,
+  payload: coloredArrayModel.restructuration(coloredList),
+});
+
+export const generateNewArray = () => {
+  return async (dispatch, state) => {
+    dispatch(getNewArray());
+    dispatch(getSortedArray(getColoredList(state())));
+    dispatch(getRestructuratedArray(getColoredList(state())));
+  };
+};
 
 export const sortBySpectrumCall = () => ({
   type: ACTION_TYPES.SORT_BY_SPECTRUM,
@@ -36,7 +53,6 @@ export function generateArray() {
   return async dispatch => {
     dispatch(setStartGenerateNewArray());
     dispatch(generateNewArray());
-    dispatch(initHistory());
     dispatch(setEndGenerateNewArray());
   };
 }
@@ -45,7 +61,7 @@ export function sortBySpectrum(param) {
     dispatch(sortBySpectrumCall());
     dispatch(setSortedParamValue(param));
     if (param) {
-      dispatch(setSortedArray(coloredArrayModel.sortByChannel(getList(state()), param)));
+      dispatch(setSortedArray(coloredArrayModel.sortByChannel(getColoredList(state()), param)));
     }
   };
 }

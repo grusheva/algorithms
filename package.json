@@ -1,5 +1,5 @@
 {
-  "name": "doggo_search",
+  "name": "algoritms",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -36,9 +36,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js src",
     "lint:fix": "eslint --ext .js src --fix",
-    "test": "react-scripts test --coverage",
-    "test:nowatch": "react-scripts test --coverage --watchAll=false",
-    "precommit": "yarn run lint && yarn run test:nowatch"
+    "precommit": "npm run lint"
   },
   "browserslist": {
     "production": [
