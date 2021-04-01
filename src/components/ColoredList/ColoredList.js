@@ -1,13 +1,13 @@
 import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
-import { getIsLoading, getList } from '../../store/coloredArray/selectors';
+import { getIsLoading, getColoredList } from '../../store/coloredArray/selectors';
 
 import { Box } from './style';
 import { ColoredItem } from './ColoredItem';
 import { getSelectedIdsMap } from '../../store/select/selectors';
 
 export function ColoredListComponent() {
-  const list = useSelector(getList);
+  const list = useSelector(getColoredList);
   const isLoading = useSelector(getIsLoading);
   const selectedIdsMap = useSelector(getSelectedIdsMap);
 
