@@ -9,19 +9,22 @@ export const getNewArray = () => ({
 
 export const getSortedArray = coloredList => ({
   type: ACTION_TYPES.GET_SORTED_ARRAY,
-  payload: coloredArrayModel.sortByHex(coloredList),
+  payload: coloredArrayModel.sort(coloredList),
 });
 
-export const getRestructuratedArray = coloredList => ({
-  type: ACTION_TYPES.GET_RESTRUCTURATED_ARRAY,
-  payload: coloredArrayModel.restructuration(coloredList),
+export const getPrefixTree = coloredList => ({
+  type: ACTION_TYPES.GET_TRIE,
+  payload: coloredArrayModel.getPrefixTree(coloredList),
 });
 
 export const generateNewArray = () => {
   return async (dispatch, state) => {
     dispatch(getNewArray());
-    dispatch(getSortedArray(getColoredList(state())));
-    dispatch(getRestructuratedArray(getColoredList(state())));
+
+    const coloredArray = getColoredList(state());
+
+    dispatch(getSortedArray(coloredArray));
+    dispatch(getPrefixTree((coloredArray)));
   };
 };
 

@@ -6,27 +6,25 @@ import { toggleSelectItemId } from '../../store/select/actions';
 
 import { Box } from './style';
 
-function ColoredItemComponent({ id, hex, selected }) {
+function ColoredItemComponent({ hex, selected }) {
   const dispatch = useDispatch();
 
-  const handleClick = useCallback(id => () => dispatch(toggleSelectItemId(id)), [dispatch]);
+  const handleClick = useCallback(hex => () => dispatch(toggleSelectItemId(hex)), [dispatch]);
 
   const getClassName = useCallback(() => (selected ? 'item selected' : 'item'), [selected]);
 
   const getProps = useMemo(
     () => ({
-      key: id,
-      onClick: handleClick(id),
+      onClick: handleClick(hex),
       style: { backgroundColor: `#${hex}` },
     }),
-    [id, handleClick, hex],
+    [handleClick, hex],
   );
 
   return <Box {...getProps} className={getClassName()} />;
 }
 
 ColoredItemComponent.propTypes = {
-  id: PropTypes.number.isRequired,
   hex: PropTypes.string.isRequired,
   selected: PropTypes.bool.isRequired,
 };

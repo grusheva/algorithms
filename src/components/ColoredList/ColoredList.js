@@ -14,8 +14,8 @@ export function ColoredListComponent() {
   return (
     <Box className="container">
       {!isLoading &&
-        list.map(({ id, hex }) => (
-          <ColoredItem key={id} id={id} hex={hex} selected={Boolean(selectedIdsMap[id])} />
+        list.map(hex => (
+          <ColoredItem key={hex} hex={hex} selected={Boolean(selectedIdsMap[hex])} />
         ))}
     </Box>
   );

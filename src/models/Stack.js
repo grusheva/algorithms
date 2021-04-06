@@ -1,5 +1,5 @@
 export class Stack {
-  constructor(limit = 3) {
+  constructor(limit = 20) {
     this.size = 0;
     this.storage = {};
     this.limit = limit;
