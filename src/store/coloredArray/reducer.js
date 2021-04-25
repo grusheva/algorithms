@@ -3,7 +3,8 @@ import { ACTION_TYPES } from './actionTypes';
 const defaultState = {
   list: [],
   sortedList: [],
-  listAsMap: {},
+  prefixTree: {},
+  binaryTree: {},
   param: null,
   isLoading: true,
 };
@@ -24,10 +25,10 @@ export const coloredArray = (state = defaultState, action) => {
       };
     }
 
-    case ACTION_TYPES.GET_RESTRUCTURATED_ARRAY: {
+    case ACTION_TYPES.GET_TRIE: {
       return {
         ...state,
-        listAsMap: action.payload,
+        prefixTree: action.payload,
       };
     }
 

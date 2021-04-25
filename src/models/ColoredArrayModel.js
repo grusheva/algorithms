@@ -1,22 +1,17 @@
 import { SPECTRUM_VALUES } from '../utils/constants';
-import { getNestedMap } from '../utils/getNestedMap';
+import { BinaryTree } from './BinaryTree';
+import { Trie } from './Trie';
 
 class ColoredArrayModel {
   defaultValues = { count: 10000 };
-  totalCounter = 0;
 
   generate(count = this.defaultValues.count) {
-    const newArray = new Array(count);
-
-    for (let i = 0; i < count; i++) {
-      newArray[i] = {
-        hex: Math.random().toString(16).substr(2, 6),
-        id: this.totalCounter,
-      };
-      this.totalCounter += 1;
+    const newSet = new Set();
+    while (newSet.size < count) {
+      newSet.add(Math.random().toString(16).substr(2, 6));
     }
 
-    return newArray;
+    return Array.from(newSet);
   }
 
   getChannelValue(channel, hex) {
@@ -33,32 +28,35 @@ class ColoredArrayModel {
 
   sortByChannel(array, param) {
     return [
-      ...array.sort(
-        (a, b) => this.getChannelValue(param, a.hex) - this.getChannelValue(param, b.hex),
-      ),
+      ...array.sort((a, b) => this.getChannelValue(param, a) - this.getChannelValue(param, b)),
     ];
   }
 
-  sortByHex(array) {
+  sort(array) {
     return [...array].sort((a, b) => {
-      if (a.hex < b.hex) {
+      if (a < b) {
         return -1;
       }
-      if (a.hex > b.hex) {
+      if (a > b) {
         return 1;
       }
       return 0;
     });
   }
 
-  restructuration(array = []) {
-    let coloredMap = {};
+  getPrefixTree(array = []) {
+    const trie = new Trie();
+    array.forEach(item => trie.insert(item));
 
-    array.forEach(
-      ({ hex, id }) => (coloredMap = { ...coloredMap, ...getNestedMap(hex, id, coloredMap) }),
-    );
+    return trie;
+  }
 
-    return coloredMap;
+  getBalancedBinaryTree(array) {
+    const binaryTree = new BinaryTree();
+
+    binaryTree.createBalancedTreeFromArr(array);
+
+    return binaryTree;
   }
 }
 

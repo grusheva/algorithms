@@ -1,14 +1,11 @@
 import { ACTION_TYPES } from './actionTypes';
 import {
   getColoredHexSortedList,
-  // getColoredMap,
+  getHexPrefixTree,
 } from '../coloredArray/selectors';
 import { setFilterValue } from '../filter/actions';
 import { getHistory } from './selectors';
-import {
-  binarySearch,
-  // getFiniteValues
-} from '../../utils';
+import { binarySearch } from '../../utils';
 
 export const toggleSelectItemId = payload => ({
   type: ACTION_TYPES.TOGGLE_SELECT_ITEM_ID,
@@ -29,14 +26,16 @@ export const selectByFilter = value => {
     }
 
     if (value === 0 || value) {
+      //   binarySearch
       const list = getColoredHexSortedList(state());
-      const selectedIdsMap = binarySearch(list, value);
-      dispatch(updateSelectedIdsArray(selectedIdsMap));
-
-      // experiment with another structure
-      // const list1 = getColoredMap(state());
-      // let selectedIdsMap1 = getFiniteValues(list1[value[0]]);
-      // dispatch(updateSelectedIdsArray(selectedIdsMap1));
+      const selectedByBinarySearchIdsMap = binarySearch(list, value);
+      console.log('binarySearch', selectedByBinarySearchIdsMap)
+      // dispatch(updateSelectedIdsArray(selectedByBinarySearchIdsMap));
+      //
+      //   prefix tree
+      const trie = getHexPrefixTree(state());
+      const selectedByTrieIdsMap = trie.find(value);
+      dispatch(updateSelectedIdsArray(selectedByTrieIdsMap));
     } else {
       dispatch(updateSelectedIdsArray({}));
     }

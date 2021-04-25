@@ -6,14 +6,14 @@ export const binarySearch = (sortedArray, target) => {
   while (start <= end) {
     let middle = Math.floor((start + end) / 2);
 
-    if (sortedArray[middle].hex.slice(0, target.length) === target) {
-      sortedArray.slice(start, end + 1).forEach(({ hex, id }) => {
+    if (sortedArray[middle].slice(0, target.length) === target) {
+      sortedArray.slice(start, end + 1).forEach(hex => {
         if (hex.slice(0, target.length) === target) {
-          foundIdsMap[id] = true;
+          foundIdsMap[hex] = true;
         }
       });
       return foundIdsMap;
-    } else if (sortedArray[middle].hex.slice(0, target.length) < target) {
+    } else if (sortedArray[middle].slice(0, target.length) < target) {
       start = middle + 1;
     } else {
       end = middle - 1;
