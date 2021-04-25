@@ -7,7 +7,7 @@ export const GlobalStyle = withStyles({
       height: '100%',
     },
     body: {
-      background: COLORS.generalBackground,
+      background: COLORS.white,
       fontFamily: 'Montserrat',
     },
   },

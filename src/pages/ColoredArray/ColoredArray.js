@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
 
@@ -15,19 +15,16 @@ function ColoredArray() {
     dispatch(resetSortedParam());
     dispatch(resetFilterValue());
   }, [dispatch]);
-  const filterRef = useRef(null);
 
   useEffect(() => {
     handleGenerate();
   }, [handleGenerate]);
 
   useEffect(() => {
-    const keydownHandler = e => {
-      if (e.keyCode === 90 && e.ctrlKey && !e.shiftKey) {
-        filterRef.current.blur();
+    const keydownHandler = ({ keyCode, shiftKey, ctrlKey }) => {
+      if (ctrlKey && keyCode === 90 && !shiftKey) {
         dispatch(setSelectedHistoryBack());
-      } else if (e.keyCode === 90 && e.ctrlKey && e.shiftKey) {
-        filterRef.current.blur();
+      } else if (ctrlKey && keyCode === 90 && shiftKey) {
         dispatch(setSelectedHistoryNext());
       }
     };
@@ -54,7 +51,7 @@ function ColoredArray() {
         </PageHeaderNav>
       </PageHeader>
       <SortBy />
-      <Filter filterRef={filterRef} />
+      <Filter />
       <ColoredList />
     </>
   );
