@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { getIsLoading, getColoredList } from '../../store/coloredArray/selectors';
 
 import { Box } from './style';
-import { ColoredItem } from './ColoredItem';
+import { ColoredItem } from './ColoredItem/ColoredItem';
 import { getSelectedIdsMap } from '../../store/select/selectors';
 
 export function ColoredListComponent() {

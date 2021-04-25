@@ -24,7 +24,7 @@ export const generateNewArray = () => {
     const coloredArray = getColoredList(state());
 
     dispatch(getSortedArray(coloredArray));
-    dispatch(getPrefixTree((coloredArray)));
+    dispatch(getPrefixTree(coloredArray));
   };
 };
 

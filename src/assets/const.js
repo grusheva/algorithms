@@ -1,6 +1,6 @@
 export const COLORS = {
   red: '#d32f2f',
-  generalBackground: '#ffffff',
+  white: '#ffffff',
   greyBorder: '#979797',
   sidebarBg: '#e0e0e0',
   greyLight: '#c4c4c4',

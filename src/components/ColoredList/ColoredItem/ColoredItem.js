@@ -2,7 +2,7 @@ import React, { memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
-import { toggleSelectItemId } from '../../store/select/actions';
+import { toggleSelectItemId } from '../../../store/select/actions';
 
 import { Box } from './style';
 

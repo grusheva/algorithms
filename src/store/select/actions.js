@@ -1,11 +1,11 @@
 import { ACTION_TYPES } from './actionTypes';
 import {
-  getColoredHexSortedList,
+  // getColoredHexSortedList,
   getHexPrefixTree,
 } from '../coloredArray/selectors';
 import { setFilterValue } from '../filter/actions';
 import { getHistory } from './selectors';
-import { binarySearch } from '../../utils';
+// import { binarySearch } from '../../utils';
 
 export const toggleSelectItemId = payload => ({
   type: ACTION_TYPES.TOGGLE_SELECT_ITEM_ID,
@@ -27,9 +27,8 @@ export const selectByFilter = value => {
 
     if (value === 0 || value) {
       //   binarySearch
-      const list = getColoredHexSortedList(state());
-      const selectedByBinarySearchIdsMap = binarySearch(list, value);
-      console.log('binarySearch', selectedByBinarySearchIdsMap)
+      // const list = getColoredHexSortedList(state());
+      // const selectedByBinarySearchIdsMap = binarySearch(list, value);
       // dispatch(updateSelectedIdsArray(selectedByBinarySearchIdsMap));
       //
       //   prefix tree
