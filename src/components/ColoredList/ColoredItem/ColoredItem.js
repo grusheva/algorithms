@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
@@ -9,19 +9,15 @@ import { Box } from './style';
 function ColoredItemComponent({ hex, selected }) {
   const dispatch = useDispatch();
 
-  const handleClick = useCallback(hex => () => dispatch(toggleSelectItemId(hex)), [dispatch]);
+  const handleClick = () => dispatch(toggleSelectItemId(hex));
 
-  const getClassName = useCallback(() => (selected ? 'item selected' : 'item'), [selected]);
-
-  const getProps = useMemo(
-    () => ({
-      onClick: handleClick(hex),
-      style: { backgroundColor: `#${hex}` },
-    }),
-    [handleClick, hex],
+  return (
+    <Box
+      style={{ backgroundColor: `#${hex}` }}
+      onClick={handleClick}
+      className={selected ? 'selected' : ''}
+    />
   );
-
-  return <Box {...getProps} className={getClassName()} />;
 }
 
 ColoredItemComponent.propTypes = {
