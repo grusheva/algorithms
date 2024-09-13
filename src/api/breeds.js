@@ -4,7 +4,7 @@ import {
   RANDOM_IMAGE_URL,
   LIST_BREED_IMAGES_URL,
   LIST_SUB_BREED_URL,
-} from '../constants/dogApiUrl';
+} from '../constants/apiUrl';
 
 export const getAllBreeds = () => api.get(LIST_ALL_URL);
 

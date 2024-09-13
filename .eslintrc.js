@@ -17,7 +17,10 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', 'prettier'],
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    requireConfigFile: false,
+  },
   rules: {
     'max-len': ['error', { code: 100, ignoreComments: true }],
     'linebreak-style': 'off',
