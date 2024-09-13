@@ -1,4 +1,4 @@
 # Training project 
 
 
-https://algorithms.vercel.app/
+https://algorithms-grushevas-projects.vercel.app/
